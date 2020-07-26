@@ -24,7 +24,7 @@ export const ListItem = styled.li`
     border: 2px solid var(--color1);
   }
 
-  .text {
+  .box-description {
     padding: 16px;
     font-size: 14px;
 
@@ -54,7 +54,7 @@ export const ListItem = styled.li`
     }
   }
 
-  .image img {
+  .box-image img {
     width: 140px;
     height: 216px;
 

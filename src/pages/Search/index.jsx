@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import api from '../../services/api';
+import { apiAllBooks } from '../../services/api';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -17,7 +17,7 @@ const Search = () => {
     event.preventDefault();
   
     const value = document.querySelector('input').value  
-    const { data } = await api.get(`${value}&maxResults=12`)
+    const { data } = await apiAllBooks.get(`${value}&maxResults=12`)
     
     setBooks([data.items]);
     setQuantity(data.totalItems);

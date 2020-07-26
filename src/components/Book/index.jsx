@@ -1,14 +1,16 @@
 import React from 'react';
-import { ListItem } from './styles';
+import { Link } from 'react-router-dom';
 
+import { ListItem } from './styles';
 import error404Img from '../../assets/404.svg';
 
 const Book = ({books}) => {
 
   return (
+    console.log(books),
     books.map(book => (
       <ListItem key={book.id}>
-        <div className='image'>
+        <div className='box-image'>
 
           {book.volumeInfo.imageLinks !== undefined
             ? <img src={book.volumeInfo.imageLinks.thumbnail} alt=""/>
@@ -17,7 +19,7 @@ const Book = ({books}) => {
       
         </div>
 
-        <div className='text'>
+        <div className='box-description'>
           <p className='title'>{book.volumeInfo.title}</p>
 
           <p className='author'><span>Autores: </span>{book.volumeInfo.authors}</p>
@@ -32,7 +34,11 @@ const Book = ({books}) => {
             : <p className='pages'><span>Páginas: </span>Não informado</p>
           }
           
-          <button className='more-information'>Ver mais</button>
+          <Link to={`book/${book.id}`}>
+            <button className='more-information'>
+              Ver mais
+            </button>
+          </Link>
         </div>
 
       </ListItem> )) 
