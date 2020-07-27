@@ -24,35 +24,33 @@ export const Container = styled.div`
   }
 
   .controls {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        margin-top: 8px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+  }
 
   .controls div {
-        cursor: pointer;
+    cursor: pointer;
+    background-color: var(--color1);
+    color: var(--color3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12;
+  }
 
-        border: 1px solid var(--color1);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 14;
+  .controls div:not(.numbers),
+  .controls div.numbers div {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color3);  
+    border-collapse: collapse;
+    
+    &:hover {
+      filter: brightness(90%);
     }
-
-    .controls div:not(.numbers),
-    .controls div.numbers div{
-        width: 40px;
-        height: 40px;
-    }
-
-    .controls div.numbers div:hover,
-    .controls div.numbers div.active {
-        color: var(--primary);
-    }
+  }
 `;
 
 export const Content = styled.section`
