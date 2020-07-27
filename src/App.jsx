@@ -8,9 +8,11 @@ function App() {
 
   return (
     <>
+    
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
+    
       <GlobalStyle />
     </>
   )
