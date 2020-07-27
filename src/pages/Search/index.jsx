@@ -40,7 +40,8 @@ const Search = () => {
     }
 
     handleSearchBooksPerPage()
-  }, [currentPage, input, term])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage])
 
   async function handleSearchBooks(event) {
     
@@ -93,7 +94,14 @@ const Search = () => {
           </div>
 
           <Books>
-            {totalBooks ? <p className='quantity'>Termo da pesquisa: <strong>{term}</strong> <br/> Cerca de {totalBooks} livros encontrados</p>: ''}
+            {totalBooks 
+              ? 
+              <>
+                <p className='quantity'>Termo da pesquisa: <strong>{term}</strong>
+                </p>
+                <p>Cerca de {totalBooks} livros encontrados</p>
+              </>
+              : ''}
 
             {books[0] 
               ? '' 
@@ -112,7 +120,7 @@ const Search = () => {
           <div className="controls">
             <div className="first">&#171;</div>
             <div className="prev">&lt;</div>
-            <div className="numbers" onClick={(event) => setCurrentPage(event.target.textContent)}>
+            <div className="numbers" onClick={(event) => (setCurrentPage(event.target.textContent))}>
               <div>1</div>
             </div>
             <div className="next">&gt;</div>

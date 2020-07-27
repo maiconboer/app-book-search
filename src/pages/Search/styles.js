@@ -30,6 +30,10 @@ export const Container = styled.div`
     margin-top: 8px;
   }
 
+  .selected {
+    background-color: red;
+  }
+
   .controls div {
     cursor: pointer;
     background-color: var(--color1);
