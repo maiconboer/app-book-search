@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 
 import { apiAllBooks } from '../../services/api';
@@ -14,6 +14,9 @@ const Search = () => {
 
   const [books, setBooks] = useState([]);
   const [totalBooks, setTotalBooks] = useState(null);
+  const [input, setInput] = useState('');
+  const [term, setTerm] = useState('');
+  const inputElement = useRef()
   
   const maxResults = 21;
 
@@ -24,12 +27,15 @@ const Search = () => {
     try {
       event.preventDefault();
       sessionStorage.clear();
-    
-      const value = document.querySelector('input').value  
-      const { data } = await apiAllBooks.get(`${value}&startIndex=0&maxResults=${maxResults}`)
+ 
+      const { data } = await apiAllBooks.get(`${input}&startIndex=0&maxResults=${maxResults}`)
+
       
       setBooks([data.items]);
       setTotalBooks(data.totalItems);
+      setTerm(input);
+      setInput('');
+      inputElement.current.focus();
 
     } catch (error) {
       console.log(error)
@@ -47,7 +53,9 @@ const Search = () => {
               <input
                 type='text' 
                 name='search' 
-                id='search'
+                ref={inputElement}
+                value={input}
+                onChange={({ target }) => setInput(target.value)}
                 placeholder='Autor, nome do livro ou palavra chave...'
               />
             </div>
@@ -61,7 +69,7 @@ const Search = () => {
           </div>
 
           <Books>
-            {totalBooks ? <p className='quantity'>Cerca de {totalBooks} livros encontrados</p>: ''}
+            {totalBooks ? <p className='quantity'>Termo da pesquisa: <strong>{term}</strong> <br/> Cerca de {totalBooks} livros encontrados</p>: ''}
 
             {books[0] 
               ? '' 
