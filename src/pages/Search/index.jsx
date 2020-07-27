@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 import { apiAllBooks } from '../../services/api';
+import pagination from '../../utils/pagination';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -11,16 +13,28 @@ import searchImg from '../../assets/search.svg';
 const Search = () => {
 
   const [books, setBooks] = useState([]);
-  const [quantity, setQuantity] = useState(null);
+  const [totalBooks, setTotalBooks] = useState(null);
+  const [currentPage, setCurrentPage] = useState(null);
+  
+  const maxResults = 21;
+
+  // TRABALHANDO NA PÁGINAÇÃO
 
   async function handleSearchBooks(event) {
-    event.preventDefault();
-  
-    const value = document.querySelector('input').value  
-    const { data } = await apiAllBooks.get(`${value}&maxResults=12`)
     
-    setBooks([data.items]);
-    setQuantity(data.totalItems);
+    try {
+      event.preventDefault();
+      sessionStorage.clear();
+    
+      const value = document.querySelector('input').value  
+      const { data } = await apiAllBooks.get(`${value}&startIndex=0&maxResults=${maxResults}`)
+      
+      setBooks([data.items]);
+      setTotalBooks(data.totalItems);
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -48,7 +62,7 @@ const Search = () => {
           </div>
 
           <Books>
-            {quantity ? <p className='quantity'>Cerca de {quantity} livros encontrados</p>: ''}
+            {totalBooks ? <p className='quantity'>Cerca de {totalBooks} livros encontrados</p>: ''}
 
             {books[0] 
               ? '' 
@@ -61,8 +75,24 @@ const Search = () => {
               }
             </ul>
           </Books>
-          
-        </Content>  
+    
+        </Content> 
+ 
+           <div className="controls">
+              <div className="first">&#171;</div>
+              <div className="prev">&lt;</div>
+              <div className="numbers">
+                <div>1</div>
+              </div>
+              <div className="next">&gt;</div>
+              <div className="last">&#187;</div>
+            </div>
+             
+        {books[0] 
+          ?  pagination(totalBooks, maxResults)
+          : ''
+        }
+
       <Footer footer='footer' />
     </Container>
   </>

@@ -7,7 +7,6 @@ import error404Img from '../../assets/404.svg';
 const Book = ({books}) => {
 
   return (
-    console.log(books),
     books.map(book => (
       <ListItem key={book.id}>
         <div className='box-image'>

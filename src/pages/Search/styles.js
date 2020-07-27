@@ -22,6 +22,37 @@ export const Container = styled.div`
     color: var(--color1);
     text-decoration: var(--color1);
   }
+
+  .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 8px;
+    }
+
+  .controls div {
+        cursor: pointer;
+
+        border: 1px solid var(--color1);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 14;
+    }
+
+    .controls div:not(.numbers),
+    .controls div.numbers div{
+        width: 40px;
+        height: 40px;
+    }
+
+    .controls div.numbers div:hover,
+    .controls div.numbers div.active {
+        color: var(--primary);
+    }
 `;
 
 export const Content = styled.section`
