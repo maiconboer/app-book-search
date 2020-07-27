@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 import { apiAllBooks } from '../../services/api';
@@ -14,7 +14,6 @@ const Search = () => {
 
   const [books, setBooks] = useState([]);
   const [totalBooks, setTotalBooks] = useState(null);
-  const [currentPage, setCurrentPage] = useState(null);
   
   const maxResults = 21;
 
